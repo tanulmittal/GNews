@@ -10,7 +10,7 @@ To get started with the Google News Fetcher, follow these steps:
 
 1. Clone the Repository: Clone this repository to your local machine using Git.
    
-   git clone https://github.com/your-username/GNews.git
+   git clone https://github.com/tanulmittal/GNews.git
 
 3. Create Virtual Environment: Set up a virtual environment using Python's built-in venv module.
    
