@@ -1,18 +1,14 @@
 from gnews import GNews
+import time
+from flask import Flask, render_template
 
-google_news = GNews()
+app = Flask(__name__)
 
+@app.route('/')
+def index():
+    google_news = GNews()
+    india_ai_news = google_news.get_news('Artificial Intelligence')[:3]
+    return render_template('index.html', india_ai_news=india_ai_news)
 
-google_news.start_date = (2021, 1, 1)
-google_news.end_date = (2021, 2, 1)
-google_news.max_results = 2
-
-result = google_news.get_news('"WORLD"')
-print(result)
-
-print(google_news.get_news_by_topic.__doc__)
-
-google_news.get_news_by_location("WORLD")
-
-result = google_news.get_news('"WORLD"')
-print(result)
+if __name__ == '__main__':
+    app.run(debug=True)
