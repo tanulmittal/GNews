@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News</title>
+    <style>
+        .news-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .news-card {
+            width: 300px;
+            height: 200px;
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .news-image {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+        .news-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s ease-in-out;
+            transform: translateY(100%);
+        }
+        .news-card:hover .news-title {
+            transform: translateY(0);
+        }
+        .news-card:hover .news-image {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="news-container">
+        {% for news in india_ai_news %}
+            <div class="news-card">
+                <img class="news-image" src="{{ news['image_url'] or 'https://example.com/default-image.jpg' }}" alt="{{ news['title'] }}">
+                <div class="news-title">
+                    <div>{{ news['title'] }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        const newsCards = document.querySelectorAll('.news-card');
+        let currentIndex = 0;
+
+        function showNextNews() {
+            newsCards.forEach(card => card.style.zIndex = '1');
+            newsCards[currentIndex].style.zIndex = '2';
+            currentIndex = (currentIndex + 1) % newsCards.length;
+            setTimeout(showNextNews, 5000);
+        }
+
+        showNextNews();
+    </script>
+</body>
+</html>
